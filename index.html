@@ -84,6 +84,16 @@
 
     <link rel="stylesheet" href="https://use.typekit.net/cyr8gyv.css" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <style>
+      .chart-wrapper {
+        margin: 30px;
+      }
+    </style>
   </head>
   <body>
     <noscript
@@ -367,6 +377,10 @@
         </p>
       </div>
 
+      <div class="chart-wrapper">
+        <canvas id="myChart" width="400" height="100"></canvas>
+      </div>
+
       <div class="cta">
         <div class="cta__heading">
           Like this calculator? You&apos;ll love SimpleTax.
@@ -479,5 +493,44 @@
       src="./js/calculators/taxcalc-2019.js"
       class="js-secondary-script"
     ></script>
+    <script>
+      // RRSP graph creation.
+      const step = 500;
+      const min = 0;
+      const max = 25000;
+
+      var ctx = document.getElementById("myChart");
+      const labels = [];
+      const data = [];
+      for (let i = min; i <= max; i += step) {
+        labels.push(i);
+        data.push(i * Math.random());
+      }
+
+      var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "% saved on taxes",
+              data,
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
+        }
+      });
+    </script>
   </body>
 </html>
