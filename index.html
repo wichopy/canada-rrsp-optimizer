@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>SimpleTax: 2019 Canadian Income Tax Calculator</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
+
+    <link rel="canonical" href="https://simpletax.ca/calculator" />
+
+    <link
+      rel="alternate"
+      href="https://simpletax.ca/calculator"
+      hreflang="en-ca"
+    />
+    <link
+      rel="alternate"
+      href="https://simpletax.ca/fr/calculatrice"
+      hreflang="fr-ca"
+    />
+
+    <meta
+      name="description"
+      content="Quickly estimate your 2019 taxes with our simple and free calculator. See how an RRSP contribution can increase your refund."
+    />
+    <meta
+      name="keywords"
+      content="tax, taxes, software, online, preparation, canada, canadian, tax return, tax calculator, tax filing service, cra, netfile"
+    />
+
+    <!-- icons -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/img/meta/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/img/meta/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/img/meta/apple-touch-icon_en_1578949921121.png"
+      sizes="180x180"
+    />
+    <link rel="manifest" href="/manifest_en.json" />
+    <meta name="msapplication-config" content="/browserconfig_en.xml" />
+    <meta name="theme-color" content="#3498db" />
+    <!-- /icons -->
+
+    <!-- open graph -->
+    <meta
+      property="og:title"
+      content="SimpleTax: 2019 Canadian Income Tax Calculator"
+    />
+    <meta
+      property="og:description"
+      content="Quickly estimate your 2019 taxes with our simple and free calculator. See how an RRSP contribution can increase your refund."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://simpletax.ca/img/calculator_2019_en_1578949921121.jpg"
+    />
+    <meta property="og:url" content="https://simpletax.ca/calculator" />
+    <meta property="og:site_name" content="SimpleTax" />
+    <!-- /open graph -->
+
+    <!-- facebook -->
+    <meta property="fb:app_id" content="164525500364852" />
+    <!-- /facebook -->
+
+    <!-- twitter -->
+    <meta name="twitter:site" content="simpletax" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- /twitter -->
+
+    <link rel="stylesheet" href="https://use.typekit.net/cyr8gyv.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <noscript
+      ><iframe
+        src="//www.googletagmanager.com/ns.html?id=GTM-PPP7W7"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "//www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "gtm_dataLayer", "GTM-PPP7W7");
+    </script>
+
+    <main class="wrapper">
+      <header class="header">
+        <div class="header__inner">
+          <a class="header__logo" href="/">SimpleTax</a>
+          <span class="header__menu-button js-nav-toggle">Menu</span>
+          <nav class="header__nav js-nav">
+            <div class="header__nav-inner">
+              <a class="header__logo" href="/">SimpleTax</a>
+              <span class="header__menu-button js-nav-toggle">Menu</span>
+              <ul>
+                <li>
+                  <a href="/#highlights">Features</a>
+                </li>
+                <li>
+                  <a href="/compare">Compare</a>
+                </li>
+                <li>
+                  <a href="/reviews">Reviews</a>
+                </li>
+                <li>
+                  <a href="https://help.simpletax.ca" target="_blank">Help</a>
+                </li>
+                <li>
+                  <a
+                    href="/fr/calculatrice"
+                    class="js-french"
+                    data-trans-ignore-links=""
+                    >Fran&#xE7;ais</a
+                  >
+                </li>
+                <li class="header__start-continue">
+                  <a
+                    href="https://app.simpletax.ca"
+                    class="js-header-dropdown-btn"
+                    >Start or continue</a
+                  >
+                  <ul class="header__dropdown js-header-dropdown">
+                    <li>
+                      <a href="https://app.simpletax.ca/2019/"
+                        >Your 2019 tax return</a
+                      >
+                    </li>
+                    <li>
+                      <a href="https://app.simpletax.ca/2018/"
+                        >Your 2018 tax return</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="https://help.simpletax.ca/questions/access-previous-years"
+                        >Prior years</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <div class="page-header page-header--plain">
+        <h1>Tax Calculator</h1>
+        <p>
+          Use our simple calculator to quickly estimate your 2019 federal and
+          provincial taxes.
+        </p>
+      </div>
+
+      <div class="calculator">
+        <form class="calculator__fields" id="taxcalcfields" novalidate="">
+          <div class="calculator__province">
+            <label for="fieldProvice">Province or territory</label>
+            <select id="fieldProvince">
+              <option value="" selected></option>
+              <option value="AB">Alberta</option>
+              <option value="BC">British Columbia</option>
+              <option value="MB">Manitoba</option>
+              <option value="NB">New Brunswick</option>
+              <option value="NL">Newfoundland</option>
+              <option value="NT">Northwest Territories</option>
+              <option value="NS">Nova Scotia</option>
+              <option value="NU">Nunavut</option>
+              <option value="ON">Ontario</option>
+              <option value="PE">Prince Edward Island</option>
+              <option value="QC">Qu&#xE9;bec</option>
+              <option value="SK">Saskatchewan</option>
+              <option value="YT">Yukon</option>
+            </select>
+          </div>
+
+          <div class="calculator__section">
+            <h4>Income &amp; Deductions</h4>
+            <label class="calculator__row">
+              <span>Employment income</span>
+              <input
+                id="fieldIncome"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="Employment income and taxable benefits."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Self-employment income</span>
+              <input
+                id="fieldSEIncome"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="Business, professional, commission, partnership, fishing, and farming income."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Capital gains</span>
+              <input
+                id="fieldCapGains"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="The total amount of your capital gains."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Eligible dividends</span>
+              <input
+                id="fieldEDivs"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="In general, these are dividends received from public companies. Enter the actual amount of dividends received."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Ineligible dividends</span>
+              <input
+                id="fieldIDivs"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="In general, these are dividends received from private companies. Enter the acutal amount of dividends received."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Other income</span>
+              <input
+                id="fieldOtherIncome"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="All other income (like rental income, interest, EI, CPP, and OAS)."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>RRSP deduction</span>
+              <input
+                id="fieldRRSP"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="Keep in mind there is a maximum you can deduct each year."
+              />
+            </label>
+            <label class="calculator__row">
+              <span>Income taxes paid</span>
+              <input
+                id="fieldTaxesPaid"
+                type="text"
+                pattern="[0-9]*"
+                placeholder="$"
+                data-tooltip="For example, taxes deducted from your paycheque. Don't include CPP/EI."
+              />
+            </label>
+          </div>
+
+          <div class="calculator__section" id="taxcalcanswers">
+            <h4>Results</h4>
+            <div class="calculator__row">
+              <span>Total income</span>
+              <span class="calculator__answer js-answer answerTotalInc"></span>
+            </div>
+            <div class="calculator__row">
+              <span class="indent sub">Federal tax</span>
+              <span
+                class="calculator__answer js-answer answerFederal sub"
+              ></span>
+            </div>
+            <div class="calculator__row">
+              <span class="indent sub">Provincial tax</span>
+              <span
+                class="calculator__answer js-answer answerProvincial sub"
+              ></span>
+            </div>
+            <div class="calculator__row showCPPEIPremiums hidden">
+              <span class="indent sub"
+                ><span class="showCPP">CPP</span
+                ><span class="showQPP hidden">QPP</span>/EI premiums
+                <span class="showSelfEmpCPP hidden"
+                  >(employment income)</span
+                ></span
+              >
+              <span
+                class="calculator__answer js-answer answerPayroll sub"
+              ></span>
+            </div>
+            <div class="calculator__row showSelfEmpCPP hidden">
+              <span class="indent sub"
+                ><span class="showCPP">CPP</span
+                ><span class="showQPP hidden">QPP</span> premiums
+                <span class="showCPPEIPremiums hidden"
+                  >(self-employment income)</span
+                ></span
+              >
+              <span class="calculator__answer js-answer answerCPP sub"></span>
+            </div>
+            <div class="calculator__row">
+              <span>Total tax</span>
+              <span class="calculator__answer js-answer answerTaxes"></span>
+            </div>
+            <div class="calculator__row">
+              <span>After-tax income</span>
+              <span class="calculator__answer js-answer answerAfterTax"></span>
+            </div>
+            <div class="calculator__row showTaxPaid hidden">
+              <span
+                >Estimated <span class="showRefund">refund</span
+                ><span class="showOwing">balance owing</span></span
+              >
+              <span class="calculator__answer js-answer answerAmount"></span>
+            </div>
+            <div class="calculator__row showRRSP hidden">
+              <span>RRSP tax savings</span>
+              <span class="calculator__answer js-answer answerRRSP"></span>
+            </div>
+            <div class="calculator__row">
+              <span>Average tax rate</span>
+              <span
+                class="calculator__answer js-answer answerERate js-percent"
+              ></span>
+            </div>
+            <div class="calculator__row">
+              <span>Marginal tax rate</span>
+              <span
+                class="calculator__answer js-answer answerMRate js-percent"
+              ></span>
+            </div>
+          </div>
+        </form>
+
+        <p class="calculator__fine-print">
+          These calculations are approximate and include the following
+          non-refundable tax credits: the basic personal tax amount, CPP/QPP and
+          EI premiums, and the Canada employment amount. After-tax income is
+          your total income net of federal tax, provincial tax, and payroll tax.
+        </p>
+        <p class="calculator__fine-print">
+          Rates are up to date as of April 12, 2019.
+        </p>
+      </div>
+
+      <div class="cta">
+        <div class="cta__heading">
+          Like this calculator? You&apos;ll love SimpleTax.
+        </div>
+        <div class="cta__action">
+          <a href="https://app.simpletax.ca/2019/"
+            >Start your 2019 tax return</a
+          >
+        </div>
+        <p>Get your maximum refund, guaranteed.</p>
+      </div>
+    </main>
+
+    <div class="footer">
+      <div class="footer__nav">
+        <ul class="footer__nav-list">
+          <li><a href="https://app.simpletax.ca/?action=signup">Sign Up</a></li>
+          <li><a href="https://app.simpletax.ca/?action=login">Log In</a></li>
+          <li><a href="/">Features</a></li>
+          <li><a href="/compare">Compare</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+          <li><a href="https://help.simpletax.ca" target="_blank">Help</a></li>
+          <li>
+            <a
+              href="/fr/calculatrice"
+              class="js-french"
+              data-trans-ignore-links=""
+              >Fran&#xE7;ais</a
+            >
+          </li>
+        </ul>
+        <ul class="footer__nav-list footer__nav-list--right">
+          <li><strong>Tax Years</strong></li>
+          <li><a href="https://app.simpletax.ca/2019/">2019</a></li>
+          <li><a href="https://app.simpletax.ca/2018/">2018</a></li>
+          <li><a href="https://app.simpletax.ca/2017/">2017</a></li>
+          <li><a href="https://app.simpletax.ca/2016/">2016</a></li>
+          <li><a href="https://app.simpletax.ca/2015/">2015</a></li>
+          <li><a href="https://app.simpletax.ca/2014/">2014</a></li>
+          <li><a href="https://app.simpletax.ca/2013/">2013</a></li>
+          <li><a href="https://app.simpletax.ca/2012/">2012</a></li>
+        </ul>
+        <ul class="footer__nav-list footer__nav-list--right">
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/calculator">Tax Calculator</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li>
+            <a href="https://jobs.lever.co/wealthsimple/?team=SimpleTax"
+              >Jobs</a
+            >
+          </li>
+        </ul>
+        <ul class="footer__nav-list">
+          <li><a href="/blog">Blog</a></li>
+          <li>
+            <a href="https://www.facebook.com/simpletaxca" target="_blank"
+              >Facebook</a
+            >
+          </li>
+          <li>
+            <a href="https://twitter.com/simpletax" target="_blank">Twitter</a>
+          </li>
+        </ul>
+        <ul class="footer__nav-list">
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+        <div class="footer__nav-company">
+          <p>SimpleTax Software Inc.</p>
+          <p>Designed and made in Canada</p>
+          <a href="https://app.simpletax.ca/?action=pay">Support SimpleTax</a>
+        </div>
+      </div>
+      <div class="footer__logos">
+        <a
+          class="footer__logo"
+          href="https://l.smpltx.ca/en/cra/netfile/certified"
+          target="_blank"
+        >
+          <img
+            src="/img/netfile_certified_en_1578949921121.png"
+            alt="NETFILE Certified"
+            srcset="/img/netfile_certified_en@2x_1578949921121.png 2x"
+          />
+        </a>
+        <a
+          class="footer__logo"
+          href="https://l.smpltx.ca/en/rq/authorized-software"
+          target="_blank"
+        >
+          <img
+            src="/img/netfileqc_certified_en_1578949921121.png"
+            alt="NetFile Qu&#xE9;bec Certified"
+            srcset="/img/netfileqc_certified_en@2x_1578949921121.png 2x"
+          />
+        </a>
+      </div>
+    </div>
+
+    <script>
+      var lang = "en";
+    </script>
+    <script
+      src="./js/main_1578949921121.min.js"
+      class="js-main-script"
+    ></script>
+    <script
+      src="./js/calculators/taxcalc-2019.js"
+      class="js-secondary-script"
+    ></script>
+  </body>
+</html>
