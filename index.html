@@ -494,42 +494,120 @@
       class="js-secondary-script"
     ></script>
     <script>
-      // RRSP graph creation.
-      const step = 500;
-      const min = 0;
-      const max = 25000;
+      function grabInputs() {
+        var inputs = {
+          prov: $("#fieldProvince").val(),
+          income_emp: AutoNumeric.getNumber("#fieldIncome"),
+          income_se: AutoNumeric.getNumber("#fieldSEIncome"),
+          rrsp_d: AutoNumeric.getNumber("#fieldRRSP"),
+          c_g: AutoNumeric.getNumber("#fieldCapGains"),
+          e_div: AutoNumeric.getNumber("#fieldEDivs"),
+          i_div: AutoNumeric.getNumber("#fieldIDivs"),
+          other_inc: AutoNumeric.getNumber("#fieldOtherIncome"),
+          tax_paid: AutoNumeric.getNumber("#fieldTaxesPaid")
+        };
 
-      var ctx = document.getElementById("myChart");
-      const labels = [];
-      const data = [];
-      for (let i = min; i <= max; i += step) {
-        labels.push(i);
-        data.push(i * Math.random());
+        if (!inputs.prov) {
+          // don't run with no province set
+          return null;
+        }
+
+        return inputs;
       }
 
-      var myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels,
-          datasets: [
-            {
-              label: "% saved on taxes",
-              data,
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true
+      function drawGraph() {
+        // RRSP graph creation.
+        const step = 500;
+        const min = 0;
+        const max = 30000;
+
+        const inputs = grabInputs();
+        if (!inputs) return;
+
+        var ctx = document.getElementById("myChart");
+        const labels = [];
+
+        const refund = [];
+        const tax = [];
+        const rrspDiff = [];
+        const percentReturn = [];
+        const taxesPaid = [];
+        for (let i = min; i <= max; i += step) {
+          labels.push(i);
+          taxesPaid.push(inputs.tax_paid);
+          // Calculate the RRSP returns if this amount was contributed.
+          var calc = new taxCalc({ ...inputs, rrsp_d: i });
+
+          refund.push(calc.refund);
+          tax.push(calc.tax);
+          var xRrspCalc = new taxCalc($.extend({}, inputs, { rrsp_d: 0 }));
+          rrspDiff.push(Math.abs(calc.tax - xRrspCalc.tax));
+
+          if (calc.refund <= 0 || i === 0) {
+            percentReturn.push(0);
+          } else {
+            percentReturn.push((calc.refund / i) * 100);
+          }
+        }
+
+        var myChart = new Chart(ctx, {
+          type: "line",
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  type: "linear",
+                  position: "left",
+                  id: "y-axis-1"
+                },
+                {
+                  type: "linear",
+                  position: "right",
+                  id: "y-axis-2"
                 }
+              ]
+            }
+          },
+          data: {
+            labels,
+            datasets: [
+              // {
+              //   label: "refund",
+              //   data: refund
+              // },
+              {
+                label: "rrsp tax credit",
+                data: refund,
+                borderColor: "rgb(75, 192, 192)",
+                yAxisID: "y-axis-1"
+              },
+              {
+                label: "percent return",
+                data: percentReturn,
+                borderColor: "rgb(54, 162, 235)",
+                yAxisID: "y-axis-2"
+              },
+              {
+                label: "taxesPaid",
+                data: taxesPaid,
+                yAxisID: "y-axis-1"
+              },
+              {
+                label: "tax",
+                data: tax,
+                borderColor: "rgb(255, 99, 132)",
+                yAxisID: "y-axis-1"
               }
             ]
           }
-        }
+        });
+      }
+
+      $("#taxcalcfields").on("change", "select", function(event) {
+        drawGraph();
+      });
+      $("#taxcalcfields").on("keyup", "input, select", function(event) {
+        drawGraph();
       });
     </script>
   </body>
